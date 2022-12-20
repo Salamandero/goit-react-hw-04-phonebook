@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const Contact = ({ contact: { name, number } }) => {
+const Contact = ({ contact: { name, number } }) => {
   return (
     <li>
       <p>{name}</p>
@@ -15,3 +15,5 @@ Contact.propTypes = {
     number: PropTypes.string.isRequired,
   }),
 };
+
+export default Contact;

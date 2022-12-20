@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { Contact } from './Contact/Contact';
+import Contact from './Contact/Contact';
 
-export const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts }) => {
   return contacts.map(contact => (
     <Contact key={contact.id} contact={contact} />
   ));
@@ -14,3 +14,5 @@ ContactList.propTypes = {
     })
   ),
 };
+
+export default ContactList;
