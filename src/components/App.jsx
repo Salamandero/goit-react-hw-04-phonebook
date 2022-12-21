@@ -16,7 +16,14 @@ class App extends Component {
   };
 
   addFormContact = data => {
-    const newContact = { ...data, id: nanoid() };
+    const newContact = { id: nanoid(), ...data };
+    const newName = newContact.name;
+    const proofName = Object.values(this.state.contacts).map(
+      contact => contact.name
+    );
+    if (proofName.includes(newName)) {
+      return alert(`${newName} is already in contacts.`);
+    }
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
@@ -25,26 +32,23 @@ class App extends Component {
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
-  // getVisibleContacts = () => {
-  //   const { filter, contacts } = this.state;
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return (visibleContactsFilter = contacts.filter(contact =>
-  //     contact.text.toLowerCase().includes(normalizedFilter)
-  //   ));
-  // };
-  // onDeleteContact = contactId => {
-  //   this.setState(prevState => ({
-  //     contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-  //   }));
-  // };
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+  onDeleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
 
   render() {
-    const { contacts, filter } = this.state;
-    // const visibleContacts = this.getVisibleContacts();
-    // const normalizedFilter = filter.toLowerCase();
-    // const visibleContactsFilter = contacts.filter(contact =>
-    //   contact.text.toLowerCase().includes(normalizedFilter)
-    // );
+    const { filter } = this.state;
+    const visibleContacts = this.getVisibleContacts();
+
     return (
       <div>
         <h1>Phonebook</h1>
@@ -54,7 +58,10 @@ class App extends Component {
         <h2>Contacts</h2>
         <Filter filter={filter} onChange={this.changeFilter} />
 
-        <ContactList contacts={contacts} />
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteContact={this.onDeleteContact}
+        />
       </div>
     );
   }

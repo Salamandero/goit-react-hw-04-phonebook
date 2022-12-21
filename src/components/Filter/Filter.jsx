@@ -1,12 +1,18 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { FindByName } from './Filter.styled';
 
 const Filter = ({ filter, onChange }) => {
   return (
-    <label>
+    <FindByName>
       Find contact by name:
       <input type="text" value={filter} onChange={onChange} />
-    </label>
+    </FindByName>
   );
+};
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Filter;
