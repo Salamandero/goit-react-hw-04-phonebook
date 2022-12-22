@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import React, { Component } from 'react';
+import { MainWrapper, HeaderPhone, HeaderContacts } from './App.styled';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
@@ -50,19 +51,18 @@ class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <>
-          <ContactForm onSubmit={this.addFormContact} />
-        </>
-        <h2>Contacts</h2>
+      <MainWrapper>
+        <HeaderPhone>Phonebook</HeaderPhone>
+        <ContactForm onSubmit={this.addFormContact} />
+
+        <HeaderContacts>Contacts</HeaderContacts>
         <Filter filter={filter} onChange={this.changeFilter} />
 
         <ContactList
           contacts={visibleContacts}
           onDeleteContact={this.onDeleteContact}
         />
-      </div>
+      </MainWrapper>
     );
   }
 }
