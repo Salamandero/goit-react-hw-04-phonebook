@@ -12,7 +12,6 @@ class ContactForm extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
     this.props.onSubmit(this.state);
     this.reset();
   };
@@ -54,5 +53,15 @@ class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  state: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    number: PropTypes.number.isRequired,
+  }),
+  handleFormChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  reset: PropTypes.func,
+};
 
 export default ContactForm;
