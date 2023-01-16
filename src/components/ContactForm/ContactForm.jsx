@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
-import PropTypes from 'prop-types';
 
 const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
@@ -62,16 +61,6 @@ const ContactForm = ({ onSubmit }) => {
       </Form>
     </>
   );
-};
-
-ContactForm.propTypes = {
-  state: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-  }),
-  handleFormChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  reset: PropTypes.func,
 };
 
 export default ContactForm;
